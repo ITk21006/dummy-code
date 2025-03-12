@@ -9,7 +9,7 @@ async function loginUser(req, res) {
     return res.status(401).json({ error: "Invalid credentials" });
   }
 
-  // Password check
+  //password check
   const isMatch = await bcrypt.compare(password, user.password);
   
   if (!isMatch) {
@@ -21,4 +21,10 @@ async function loginUser(req, res) {
   res.json({ message: "Login successful" });
 }
 
-module.exports = { loginUser };
+//error logging
+function errorHandler(err, req, res, next) {
+  logger.error(err.message);
+  res.status(500).json({ error: "Internal Server Error" });
+}
+
+module.exports = { loginUser, errorHandler };

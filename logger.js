@@ -10,6 +10,7 @@ const logger = winston.createLogger({
   transports: [
     new winston.transports.Console(), //console Log
     new winston.transports.File({ filename: "logs/auth.log" }), //file Log
+    new winston.transports.File({ filename: "logs/error.log", level: "error" }), //error Log
     new winston.transports.MongoDB({ //MongoDB Log 
       db: "mongodb://localhost:27017/auth_logs",
       options: { useUnifiedTopology: true },
